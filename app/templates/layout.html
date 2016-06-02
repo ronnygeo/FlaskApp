@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Flask App</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+</head>
+<body>
+
+{% set navbarItems = [('home', "home", "Home"),('about', "about", "About")] %}
+{% set active_page = active_page | default('home') %}
+
+<nav>
+    <ul>
+    {% for href, id, caption in navbarItems %}
+        <li{% if id == active_page %} class="active" {% endif %}><a href="{{ url_for(href) }}">{{caption}}</a></li>
+    {% endfor %}
+    </ul>
+</nav>
+
+<div class="section">
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+</body>
+</html>
